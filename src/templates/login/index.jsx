@@ -1,5 +1,6 @@
 import LoginHeader from "../../components/login/header";
 import loginlogo from "../../assets/images/keelislogo.png";
+import DefaultPaperCard from "../../pages/login/CardPaths/DefaultPaperCard";
 
 const LoginLayout = ({ children }) => {
   const styles = {
@@ -21,10 +22,10 @@ const LoginLayout = ({ children }) => {
     rightSection: {
       flex: 1,
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "#ffffff",
-      padding: "40px",
+      // justifyContent: "center",
+      // alignItems: "center",
+      // background: "#c05555ff",
+      padding: "10px 20px",
     },
     heading: {
       fontSize: "28px",
@@ -59,7 +60,9 @@ const LoginLayout = ({ children }) => {
           </p>
         </div>
 
-        <div style={styles.rightSection}>{children}</div>
+        <div style={styles.rightSection}>
+          <DefaultPaperCard>{children}</DefaultPaperCard>
+        </div>
       </div>
       <div style={{ height: "300px" }}>Footer</div>
     </div>

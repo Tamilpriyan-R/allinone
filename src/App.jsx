@@ -1,15 +1,27 @@
-
+import { useEffect } from "react";
 import "./App.css";
-
-import LoginLayout from "./templates/login";
+import Login from "./pages/login";
+import { getItemWithExpiry } from "./services/tokenExpries";
 
 function App() {
-  return <>
-  
-  <LoginLayout>
-    fghjkl
-  </LoginLayout>
-  </>;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const token = getItemWithExpiry("auth_token");
+
+      if (!token) {
+        localStorage.removeItem("authenticated");
+        localStorage.removeItem("auth_token");
+        // navigate("/sign-in");
+      }
+    }, 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  return (
+    <>
+      <Login />
+    </>
+  );
 }
 
 export default App;
