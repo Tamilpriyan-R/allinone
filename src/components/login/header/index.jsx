@@ -6,7 +6,7 @@ const LoginHeader = ({ logo, title, para }) => {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-     
+
       padding: "15px 30px",
       background: "#f0f0f0da",
       position: "sticky",
