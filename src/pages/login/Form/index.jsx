@@ -17,7 +17,7 @@ const LoginInputFileds = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { setAuthenticated } = useAuth();
-    const { showSnackbar } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
 
   // Dynamic border color styles
   const getBorderColor = (status) => {
@@ -36,113 +36,111 @@ const LoginInputFileds = () => {
     e.preventDefault();
     setLoading(true);
 
- 
-    
+    localStorage.setItem("authenticated", JSON.stringify(true));
+    setAuthenticated(true);
 
-    const { success, message, data } = await userLoginServices(
-      signInData?.email,
-      signInData?.password
-    );
-    showSnackbar(message, success);
-    if (success) {
-      showSnackbar(message, "success");
-      setAuthenticated(true);
-      localStorage.setItem("authenticated", JSON.stringify(true));
-    } else {
-      showSnackbar(message, "error");
-      setAuthenticated(false);
-      localStorage.setItem("authenticated", JSON.stringify(false));
-    }
-     setLoading(false);
+    // const { success, message, data } = await userLoginServices(
+    //   signInData?.email,
+    //   signInData?.password
+    // );
+    // showSnackbar(message, success);
+    // if (success) {
+    //   showSnackbar(message, "success");
+    //   setAuthenticated(true);
+
+    // } else {
+    //   showSnackbar(message, "error");
+    //   setAuthenticated(false);
+    //   localStorage.setItem("authenticated", JSON.stringify(false));
+    // }
+    setLoading(false);
   };
 
   return (
-  
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+    >
+      {/* Email Field */}
+      <TextField
+        label="Email"
+        variant="outlined"
+        value={signInData.email || ""}
+        onChange={(e) => dispatch({ value: e?.target?.value, name: "email" })}
+        fullWidth
+        sx={{
+          margin: "3px 0px",
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: getBorderColor(signInData.emailStatus),
+            },
+            "&:hover fieldset": {
+              borderColor: getBorderColor(signInData.emailStatus),
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: getBorderColor(signInData.emailStatus),
+            },
+          },
+        }}
+      />
+
+      {/* Password Field */}
+      <TextField
+        label="Password"
+        type={showPassword ? "text" : "password"}
+        variant="outlined"
+        value={signInData.password || ""}
+        onChange={(e) =>
+          dispatch({ value: e?.target?.value, name: "password" })
+        }
+        fullWidth
+        sx={{
+          margin: "3px 0px",
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: getBorderColor(signInData.passwordStatus),
+            },
+            "&:hover fieldset": {
+              borderColor: getBorderColor(signInData.passwordStatus),
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: getBorderColor(signInData.passwordStatus),
+            },
+          },
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={() => setShowPassword((prev) => !prev)}>
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      {/* Submit Button with Loading */}
+      <Button
+        type="submit"
+        variant="contained"
+        fullWidth
+        disabled={loading}
+        sx={{
+          backgroundColor: "#1976d2",
+          "&:hover": { backgroundColor: "#1565c0" },
+          padding: "10px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "8px",
+        }}
       >
-        {/* Email Field */}
-        <TextField
-          label="Email"
-          variant="outlined"
-          value={signInData.email || ""}
-          onChange={(e) => dispatch({ value: e?.target?.value, name: "email" })}
-          fullWidth
-          sx={{
-            margin: "3px 0px",
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: getBorderColor(signInData.emailStatus),
-              },
-              "&:hover fieldset": {
-                borderColor: getBorderColor(signInData.emailStatus),
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: getBorderColor(signInData.emailStatus),
-              },
-            },
-          }}
-        />
-
-        {/* Password Field */}
-        <TextField
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          variant="outlined"
-          value={signInData.password || ""}
-          onChange={(e) =>
-            dispatch({ value: e?.target?.value, name: "password" })
-          }
-          fullWidth
-          sx={{
-            margin: "3px 0px",
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: getBorderColor(signInData.passwordStatus),
-              },
-              "&:hover fieldset": {
-                borderColor: getBorderColor(signInData.passwordStatus),
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: getBorderColor(signInData.passwordStatus),
-              },
-            },
-          }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword((prev) => !prev)}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        {/* Submit Button with Loading */}
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          disabled={loading}
-          sx={{
-            backgroundColor: "#1976d2",
-            "&:hover": { backgroundColor: "#1565c0" },
-            padding: "10px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "8px",
-          }}
-        >
-          {/* {loading && (
+        {/* {loading && (
             <CircularProgress size={20} sx={{ color: "#fff" }} />
           )} */}
-          {loading ? "Logging in..." : "Login"}
-        </Button>
-      </form>
- 
+        {loading ? "Logging in..." : "Login"}
+      </Button>
+    </form>
   );
 };
 

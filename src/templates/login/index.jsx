@@ -61,10 +61,12 @@ const LoginLayout = ({ children }) => {
         </div>
 
         <div style={styles.rightSection}>
-          <DefaultPaperCard>{children}</DefaultPaperCard>
+          <div>
+            <DefaultPaperCard logo={loginlogo}>{children}</DefaultPaperCard>
+          </div>
         </div>
       </div>
-      <div style={{ height: "300px" }}>Footer</div>
+   
     </div>
   );
 };

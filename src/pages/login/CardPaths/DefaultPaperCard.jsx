@@ -1,6 +1,6 @@
 import React from "react";
 
-const DefaultPaperCard = ({ children }) => {
+const DefaultPaperCard = ({ children ,logo}) => {
   const styles = {
     container: {
       position: "relative", // Needed for absolute positioning of logo
@@ -40,7 +40,7 @@ const DefaultPaperCard = ({ children }) => {
       {/* Logo Image in Circle */}
       <div style={styles.logoWrapper}>
         <img
-          src="https://via.placeholder.com/65" // Replace with your image URL
+          src={logo} // Replace with your image URL
           alt="Logo"
           style={styles.logo}
         />

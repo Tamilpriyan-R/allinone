@@ -3,8 +3,8 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 export default function LoginContextProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(() => {
-    const storedAuth = JSON.parse(localStorage.getItem("loginStatus"));
-    return storedAuth || true;
+    const storedAuth = JSON.parse(localStorage.getItem("authenticated"));
+    return storedAuth || false;
   });
 
   const logout = () => {
