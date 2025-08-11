@@ -5,6 +5,8 @@ const DefaultPaperCard = ({ children ,logo}) => {
     container: {
       position: "relative", // Needed for absolute positioning of logo
       display: "flex",
+      justifyContent:"center",
+      alignItems:"center",
       gap: "20px",
       width: "300px",
       padding: "50px 20px",

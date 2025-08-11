@@ -3,6 +3,7 @@ import loginlogo from "../../assets/images/keelislogo.png";
 import DefaultPaperCard from "../../pages/login/CardPaths/DefaultPaperCard";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import AlertNewCard from "./AlertNewCard";
+import bgImage from "../../assets/images/bgImage.jpg";
 
 const LoginLayout = ({ children }) => {
   const styles = {
@@ -11,7 +12,8 @@ const LoginLayout = ({ children }) => {
       display: "flex",
       flex: 1,
       // height: "600px",
-      margin: "10px 0px",
+      // margin: "10px 0px",
+      marginTop:"13px"
     },
     leftSection: {
       flex: 3,
@@ -22,8 +24,8 @@ const LoginLayout = ({ children }) => {
       alignItems: "center",
       // border: "solid",
       padding: "5px 10px",
-      background: "rgba(238, 238, 238, 0.84)",
-      color: "#424242e0",
+      background: "rgba(255, 255, 255, 1)",
+      color: "#000000ff",
       borderRadius: "8px", // rounded corners
       boxShadow: "0 2px 6px rgba(114, 114, 114, 0.3)", // subtle shadow
     },
@@ -34,22 +36,20 @@ const LoginLayout = ({ children }) => {
       flex: 1,
       display: "flex",
       padding: "10px 20px",
-     
     },
     heading: {
       fontSize: "20px",
       fontWeight: "bold",
       marginLeft: "20px",
-      color: "#424242e0",
+      color: "#000000ff",
     },
     paragraph: {
       fontSize: "16px",
-      fontWeight:"600",
+      fontWeight: "600",
       lineHeight: "1.5",
-      color: "#555",
+      color: "#ffffffff",
       maxWidth: "400px",
-      marginLeft:"15px",
-      
+      marginLeft: "15px",
     },
   };
 
@@ -93,7 +93,17 @@ const LoginLayout = ({ children }) => {
   ];
 
   return (
-    <div style={styles.container}>
+    <div style={{ ...styles.container, position: "relative" }}>
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          inset: 0,
+          zIndex: "-1",
+          background: `url(${bgImage})`,
+          filter: "brightness(0.2)",
+        }}
+      ></div>
       <LoginHeader
         logo={loginlogo}
         title="Keelis"
@@ -117,7 +127,7 @@ const LoginLayout = ({ children }) => {
                 style={{
                   marginLeft: "10px",
                   fontWeight: "600",
-                  color: "#352e2eff",
+                  color: "#fdfdfdff",
                 }}
               >
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -127,19 +137,18 @@ const LoginLayout = ({ children }) => {
               </p>
             </div>
           </div>
-          <div style={{padding:"0px 10px"}}>
+          <div style={{ padding: "0px 10px" }}>
             {subtitle?.map((v) => (
-              <p style={{margin:"10px 0px"}}>
+              <p style={{ margin: "10px 0px" }}>
                 <span>{v?.icon}</span>
                 <span style={styles.paragraph}>{v?.para}</span>
               </p>
             ))}
           </div>
-        
         </div>
 
-        <div style={{...styles.rightSection}}>
-          <div >
+        <div style={{ ...styles.rightSection }}>
+          <div>
             <DefaultPaperCard logo={loginlogo}>{children}</DefaultPaperCard>
           </div>
         </div>

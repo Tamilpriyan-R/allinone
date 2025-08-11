@@ -31,35 +31,32 @@ const NavigateCard = ({ logo, title, url }) => {
 
   return (
     <Tooltip title={title}>
-
-    <a href={fullUrl} target="_blank" rel="noopener noreferrer">
-      <Card
-        sx={{
-          height: 50,
-          width: 80,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 2,
-          boxShadow: 2,
-          cursor: "pointer",
-          "&:hover": { boxShadow: 4 },
-          flexShrink: 0,
-        
-        }}
-        
-      >
-        <img
-          src={logo}
-          alt={title}
-          style={{
-            width: "70px",
-            height: "30px",
-            objectFit: "contain",
+      <a href={fullUrl} target="_blank" rel="noopener noreferrer">
+        <Card
+          sx={{
+            height: 50,
+            width: 80,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 2,
+            boxShadow: 2,
+            cursor: "pointer",
+            "&:hover": { boxShadow: 4 },
+            flexShrink: 0,
           }}
-        />
-      </Card>
-    </a>
+        >
+          <img
+            src={logo}
+            alt={title}
+            style={{
+              width: "70px",
+              height: "30px",
+              objectFit: "contain",
+            }}
+          />
+        </Card>
+      </a>
     </Tooltip>
   );
 };

@@ -8,7 +8,7 @@ const LoginHeader = ({ logo, title, para }) => {
       alignItems: "center",
 
       padding: "15px 30px",
-      background: "#f0f0f0da",
+      background: "#ffffffff",
       position: "sticky",
       top: 0,
       zIndex: 1000,
@@ -33,7 +33,7 @@ const LoginHeader = ({ logo, title, para }) => {
     subtitleText: {
       fontSize: "14px",
       fontWeight: "600",
-      color: "#5f5f5fff",
+      color: "#020202ff",
       margin: "5px 0px",
     },
     actionSection: {

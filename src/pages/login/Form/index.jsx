@@ -5,39 +5,33 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
 import Button from "@mui/material/Button";
 import { useAuth } from "../../../context/authContext";
 import { useSnackbar } from "../../../context/snackBarProvider";
 import { userLoginServices } from "../../../services/loginServices";
 import { CircularProgress } from "@mui/material";
 import { encryptData } from "../../../functions/Encripted";
-import CryptoJS from "crypto-js";
 import axios from "axios";
 import { LOGIN_API_URL } from "../../../utils/apiUtilis";
-
-// import CircularProgress from "@mui/material/CircularProgress";
 
 const LoginInputFileds = () => {
   const [signInData, dispatch] = useReducer(signInStateMange, signInState);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setAuthenticated,  setCurrentUser } = useAuth();
+  const { setAuthenticated, setCurrentUser } = useAuth();
   const { showSnackbar } = useSnackbar();
 
-  // Dynamic border color styles
   const getBorderColor = (status) => {
     switch (status) {
       case "success":
-        return "#4caf50"; // green
+        return "#4caf50";
       case "error":
-        return "#f44336"; // red
+        return "#f44336";
       default:
-        return "#c4c4c4"; // normal grey
+        return "#c4c4c4";
     }
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -53,7 +47,8 @@ const LoginInputFileds = () => {
       encryptData(signInData?.password)
     );
 
-    showSnackbar(message, "success");
+    showSnackbar(message, success ? "success" : "error");
+
     if (success) {
       try {
         const currentuser = await axios.get(
@@ -66,21 +61,47 @@ const LoginInputFileds = () => {
           }
         );
         setCurrentUser(currentuser?.data?.data);
-        localStorage.setItem("currentUser",JSON.stringify(currentuser?.data?.data))
-
-        console.log(currentuser, "currentuser");
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify(currentuser?.data?.data)
+        );
       } catch (error) {}
 
-      showSnackbar(message, "success");
       localStorage.setItem("authenticated", JSON.stringify(true));
       setAuthenticated(true);
     } else {
-      showSnackbar(message, "error");
       setAuthenticated(false);
       localStorage.setItem("authenticated", JSON.stringify(false));
     }
     setLoading(false);
   };
+
+  // Common style for smaller fields
+  const smallFieldStyle = (status) => ({
+    margin: "3px 0px",
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: getBorderColor(status),
+      },
+      "&:hover fieldset": {
+        borderColor: getBorderColor(status),
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: getBorderColor(status),
+      },
+      height: "45px", // compact height
+    },
+    "& .MuiInputBase-input": {
+      padding: "6px 10px", // reduced padding
+      fontSize: "14px", // smaller text
+    },
+    "& .MuiInputLabel-root": {
+      fontSize: "13px", // smaller label
+    },
+    "& .MuiInputLabel-shrink": {
+      fontSize: "12px", // smaller floating label
+    },
+  });
 
   return (
     <form
@@ -94,20 +115,7 @@ const LoginInputFileds = () => {
         value={signInData.email || ""}
         onChange={(e) => dispatch({ value: e?.target?.value, name: "email" })}
         fullWidth
-        sx={{
-          margin: "3px 0px",
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: getBorderColor(signInData.emailStatus),
-            },
-            "&:hover fieldset": {
-              borderColor: getBorderColor(signInData.emailStatus),
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: getBorderColor(signInData.emailStatus),
-            },
-          },
-        }}
+        sx={smallFieldStyle(signInData.emailStatus)}
       />
 
       {/* Password Field */}
@@ -120,20 +128,7 @@ const LoginInputFileds = () => {
           dispatch({ value: e?.target?.value, name: "password" })
         }
         fullWidth
-        sx={{
-          margin: "3px 0px",
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: getBorderColor(signInData.passwordStatus),
-            },
-            "&:hover fieldset": {
-              borderColor: getBorderColor(signInData.passwordStatus),
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: getBorderColor(signInData.passwordStatus),
-            },
-          },
-        }}
+        sx={smallFieldStyle(signInData.passwordStatus)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -154,7 +149,7 @@ const LoginInputFileds = () => {
         sx={{
           backgroundColor: "#1976d2",
           "&:hover": { backgroundColor: "#1565c0" },
-          padding: "10px",
+          padding: "6px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
