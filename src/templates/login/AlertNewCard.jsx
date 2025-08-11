@@ -1,6 +1,6 @@
 const AlertNewCard = () => {
   const styles = {
-    display: "inline-block",
+    // display: "inline-block",
     padding: "4px 10px",
     borderRadius: "10px",
     backgroundColor: "red",
@@ -10,7 +10,9 @@ const AlertNewCard = () => {
     height:"20px",
     textTransform: "uppercase",
     animation: "blink 1s infinite, heartbeat 2s infinite",
-    
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
   };
 
   // Define keyframes in JS and inject them into the page
@@ -21,9 +23,9 @@ const AlertNewCard = () => {
     }
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      14% { transform: scale(1.2); }
+      14% { transform: scale(1.1); }
       28% { transform: scale(1); }
-      42% { transform: scale(1.2); }
+      42% { transform: scale(1.1); }
       70% { transform: scale(1); }
     }
   `;

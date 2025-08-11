@@ -23,7 +23,11 @@ export const userLoginServices = async (email, password) => {
     }
 
     message = response?.data?.message;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error,"error");
+    
+     message = error?.message
+  }
 
   return { success, message, data };
 };

@@ -10,6 +10,10 @@ import Button from "@mui/material/Button";
 import { useAuth } from "../../../context/authContext";
 import { useSnackbar } from "../../../context/snackBarProvider";
 import { userLoginServices } from "../../../services/loginServices";
+import { CircularProgress } from "@mui/material";
+import { encryptData } from "../../../functions/Encripted";
+import CryptoJS from "crypto-js";
+
 // import CircularProgress from "@mui/material/CircularProgress";
 
 const LoginInputFileds = () => {
@@ -31,28 +35,34 @@ const LoginInputFileds = () => {
     }
   };
 
+
+
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    localStorage.setItem("authenticated", JSON.stringify(true));
-    setAuthenticated(true);
+    const { success, message, data } = await userLoginServices(
+      signInData?.email,
+      signInData?.password
+    );
+    localStorage.setItem("rememberedEmail", encryptData(signInData?.email));
+    localStorage.setItem(
+      "rememberedPassword",
+      encryptData(signInData?.password)
+    );
+   
 
-    // const { success, message, data } = await userLoginServices(
-    //   signInData?.email,
-    //   signInData?.password
-    // );
-    // showSnackbar(message, success);
-    // if (success) {
-    //   showSnackbar(message, "success");
-    //   setAuthenticated(true);
-
-    // } else {
-    //   showSnackbar(message, "error");
-    //   setAuthenticated(false);
-    //   localStorage.setItem("authenticated", JSON.stringify(false));
-    // }
+    
+    showSnackbar(message, success);
+    if (success) {
+      showSnackbar(message, "success");
+      setAuthenticated(true);
+    } else {
+      showSnackbar(message, "error");
+      setAuthenticated(false);
+      localStorage.setItem("authenticated", JSON.stringify(false));
+    }
     setLoading(false);
   };
 
@@ -135,9 +145,7 @@ const LoginInputFileds = () => {
           gap: "8px",
         }}
       >
-        {/* {loading && (
-            <CircularProgress size={20} sx={{ color: "#fff" }} />
-          )} */}
+        {loading && <CircularProgress size={20} sx={{ color: "#fff" }} />}
         {loading ? "Logging in..." : "Login"}
       </Button>
     </form>

@@ -21,7 +21,11 @@ const Login = () => {
 
   const data = [
     { logo: soucient, title: "Soucient" },
-    { logo: insurelogistImg, title: "Insurelogist" },
+    {
+      logo: insurelogistImg,
+      title: "Insurelogist",
+      url: `http://localhost:3001/authentication`,
+    },
     { logo: crmImg, title: "CRM" },
     { logo: hrmsImg, title: "HRMS" },
   ];
@@ -72,7 +76,7 @@ const Login = () => {
           <Grid container spacing={2}>
             {data.map((v, i) => (
               <Grid item xs={12} sm={6} md={3} key={i}>
-                <NavigateCard title={v.title} logo={v.logo} />
+                <NavigateCard title={v.title} logo={v.logo} url={v?.url} />
               </Grid>
             ))}
           </Grid>

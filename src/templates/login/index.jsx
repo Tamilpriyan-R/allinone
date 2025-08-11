@@ -34,6 +34,7 @@ const LoginLayout = ({ children }) => {
       flex: 1,
       display: "flex",
       padding: "10px 20px",
+     
     },
     heading: {
       fontSize: "20px",
@@ -137,8 +138,8 @@ const LoginLayout = ({ children }) => {
         
         </div>
 
-        <div style={styles.rightSection}>
-          <div>
+        <div style={{...styles.rightSection}}>
+          <div >
             <DefaultPaperCard logo={loginlogo}>{children}</DefaultPaperCard>
           </div>
         </div>
