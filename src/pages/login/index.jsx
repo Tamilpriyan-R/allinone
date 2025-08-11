@@ -13,21 +13,29 @@ import PersonIcon from "@mui/icons-material/Person"; // icon for name
 import WorkIcon from "@mui/icons-material/Work"; // icon for role
 
 const Login = () => {
-  const { authenticated, logout, user,currentUser } = useAuth();
+  const { authenticated, logout, user, currentUser } = useAuth();
 
   // Example fallback values
   const name = currentUser?.username || "-";
   const role = currentUser?.role || "-";
 
   const data = [
-    { logo: soucient, title: "Soucient" },
+    {
+      logo: soucient,
+      title: "Soucient",
+      url: `http://localhost:3002/authentication`,
+    },
     {
       logo: insurelogistImg,
       title: "Insurelogist",
       url: `http://localhost:3001/authentication`,
     },
-    { logo: crmImg, title: "CRM" },
-    { logo: hrmsImg, title: "HRMS" },
+    { logo: crmImg, title: "CRM", url: `http://localhost:3003/authentication` },
+    {
+      logo: hrmsImg,
+      title: "HRMS",
+      url: `http://localhost:3000/authentication`,
+    },
   ];
 
   return (

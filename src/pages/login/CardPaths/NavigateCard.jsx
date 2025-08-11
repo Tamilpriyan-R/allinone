@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card } from "@mui/material";
+import { Card, Tooltip } from "@mui/material";
 import { decryptData, encryptData } from "../../../functions/Encripted";
 import CryptoJS from "crypto-js";
 
@@ -30,6 +30,8 @@ const NavigateCard = ({ logo, title, url }) => {
   }, [url]);
 
   return (
+    <Tooltip title={title}>
+
     <a href={fullUrl} target="_blank" rel="noopener noreferrer">
       <Card
         sx={{
@@ -43,7 +45,9 @@ const NavigateCard = ({ logo, title, url }) => {
           cursor: "pointer",
           "&:hover": { boxShadow: 4 },
           flexShrink: 0,
+        
         }}
+        
       >
         <img
           src={logo}
@@ -56,6 +60,7 @@ const NavigateCard = ({ logo, title, url }) => {
         />
       </Card>
     </a>
+    </Tooltip>
   );
 };
 
