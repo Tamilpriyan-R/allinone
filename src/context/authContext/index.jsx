@@ -6,6 +6,10 @@ export default function LoginContextProvider({ children }) {
     const storedAuth = JSON.parse(localStorage.getItem("authenticated"));
     return storedAuth || false;
   });
+  const [currentUser, setCurrentUser] = useState(() => {
+    const currentuser = JSON.parse(localStorage.getItem("currentUser"));
+    return currentuser || {};
+  });
 
   const logout = () => {
     setAuthenticated(false);
@@ -17,6 +21,8 @@ export default function LoginContextProvider({ children }) {
         authenticated,
         setAuthenticated,
         logout,
+        currentUser,
+        setCurrentUser,
       }}
     >
       {children}

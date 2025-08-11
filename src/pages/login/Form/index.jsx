@@ -13,6 +13,8 @@ import { userLoginServices } from "../../../services/loginServices";
 import { CircularProgress } from "@mui/material";
 import { encryptData } from "../../../functions/Encripted";
 import CryptoJS from "crypto-js";
+import axios from "axios";
+import { LOGIN_API_URL } from "../../../utils/apiUtilis";
 
 // import CircularProgress from "@mui/material/CircularProgress";
 
@@ -20,7 +22,7 @@ const LoginInputFileds = () => {
   const [signInData, dispatch] = useReducer(signInStateMange, signInState);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setAuthenticated } = useAuth();
+  const { setAuthenticated,  setCurrentUser } = useAuth();
   const { showSnackbar } = useSnackbar();
 
   // Dynamic border color styles
@@ -35,8 +37,6 @@ const LoginInputFileds = () => {
     }
   };
 
-
-
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,17 +46,33 @@ const LoginInputFileds = () => {
       signInData?.email,
       signInData?.password
     );
+
     localStorage.setItem("rememberedEmail", encryptData(signInData?.email));
     localStorage.setItem(
       "rememberedPassword",
       encryptData(signInData?.password)
     );
-   
 
-    
-    showSnackbar(message, success);
+    showSnackbar(message, "success");
     if (success) {
+      try {
+        const currentuser = await axios.get(
+          `${LOGIN_API_URL}users/v1/users/${data?.data?.id}/`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${data?.token}`,
+            },
+          }
+        );
+        setCurrentUser(currentuser?.data?.data);
+        localStorage.setItem("currentUser",JSON.stringify(currentuser?.data?.data))
+
+        console.log(currentuser, "currentuser");
+      } catch (error) {}
+
       showSnackbar(message, "success");
+      localStorage.setItem("authenticated", JSON.stringify(true));
       setAuthenticated(true);
     } else {
       showSnackbar(message, "error");

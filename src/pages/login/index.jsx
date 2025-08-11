@@ -13,11 +13,11 @@ import PersonIcon from "@mui/icons-material/Person"; // icon for name
 import WorkIcon from "@mui/icons-material/Work"; // icon for role
 
 const Login = () => {
-  const { authenticated, logout, user } = useAuth();
+  const { authenticated, logout, user,currentUser } = useAuth();
 
   // Example fallback values
-  const name = user?.name || "Priyan";
-  const role = user?.role || "Employee";
+  const name = currentUser?.username || "-";
+  const role = currentUser?.role || "-";
 
   const data = [
     { logo: soucient, title: "Soucient" },
@@ -74,7 +74,7 @@ const Login = () => {
 
           {/* Cards */}
           <Grid container spacing={2}>
-            {data.map((v, i) => (
+            {data?.map((v, i) => (
               <Grid item xs={12} sm={6} md={3} key={i}>
                 <NavigateCard title={v.title} logo={v.logo} url={v?.url} />
               </Grid>
