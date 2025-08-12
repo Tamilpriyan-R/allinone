@@ -31,7 +31,7 @@ const NavigateCard = ({ logo, title, url }) => {
 
   return (
     <Tooltip title={title}>
-      <a href={fullUrl} target="_blank" rel="noopener noreferrer">
+      <a href={fullUrl}  rel="noopener noreferrer">
         <Card
           sx={{
             height: 50,
