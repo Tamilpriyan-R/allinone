@@ -7,7 +7,7 @@ import { getItemWithExpiry } from "../services/tokenExpries";
 export const API_URL = "http://soucientinsurancedevbk.athithishala.com/api/";
 export const FILE_URL = "http://soucientinsurancedevbk.athithishala.com";
 
-export const LOGIN_API_URL = "http://soucientidentitydevbk.athithishala.com/";
+export const LOGIN_API_URL = "https://www.soucientidentitydevbk.athithishala.com/";
 export const REFRESH_URL =
   "http://soucientinsurancedevbk.athithishala.com/users/v1/validate-token/";
 
