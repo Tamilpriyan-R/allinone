@@ -23,18 +23,18 @@ const Login = () => {
     {
       logo: soucient,
       title: "Soucient",
-      url: `http://localhost:3002/authentication`,
+      url: `https://egpolicyreaderdev.athithishala.com/authentication`,
     },
     {
       logo: insurelogistImg,
       title: "Insurelogist",
-      url: `http://localhost:3001/authentication`,
+      url: `https://eggrouphealthdev.athithishala.com/authentication`,
     },
-    { logo: crmImg, title: "CRM", url: `http://localhost:3003/authentication` },
+    { logo: crmImg, title: "CRM", url: `https://egcrm.athithishala.com/authentication` },
     {
       logo: hrmsImg,
       title: "HRMS",
-      url: `http://localhost:3000/authentication`,
+      url: `https://www.eghrms.athithishala.com/authentication`,
     },
   ];
 
